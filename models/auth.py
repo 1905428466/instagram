@@ -30,6 +30,7 @@ class User(Base, BaseModels):
         user = User(username=username, password=password, **kwargs)
         session.add(user)
         session.commit()
+        session.close()
 
     @classmethod
     def check_username(cls, username):
@@ -49,6 +50,14 @@ class Post(Base, BaseModels):
 
     def __repr__(self):
         return "Post:user_id=%s" % self.user_id
+
+    @classmethod
+    def add_post(cls, image_url, username):
+        user = User.check_username(username)    # 返回user实例
+        post = Post(image_url=image_url, user_id=user.id)
+        session.add(post)
+        session.commit()
+        session.close()
 
 
 # 图片实例.user===>拿到对应的user实例

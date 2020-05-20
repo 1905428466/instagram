@@ -3,7 +3,7 @@ import tornado.web  #web应用api
 import tornado.options
 from tornado.options import define, options
 
-from handlers.main import IndexHandler, ExploreHandler, PostHandler
+from handlers.main import IndexHandler, ExploreHandler, PostHandler, UpdateHandler
 from handlers.users import RegisterHandler, LoginHandler
 
 define("port", default="8888", help="Listening port", type=int)
@@ -17,10 +17,30 @@ class Application(tornado.web.Application): #tornado配置，比如静态文件
             (r"/post/(?P<post_id>[0-9]+)", PostHandler),
             (r"/register", RegisterHandler),
             (r"/login", LoginHandler),
+            (r"/update", UpdateHandler),
         ]
         settings = dict(
             debug=True,
-            template_path="templates"  # 配置模板路径
+            template_path="templates",  # 配置模板路径
+            static_path="statics",
+            xsrf_cookies=True,
+            cookie_secret="fdasjofdsa-gfdsgdsafadsdfsd",
+            pycket={
+                'engine': 'redis',
+                'storage': {
+                    'host': '127.0.0.1',  # ip
+                    'port': 6379,
+                    'db_sessions': 7,
+                    'max_connections': 2 ** 31,
+                },
+                'cookies': {
+                    # 设置过期时间
+                    'expires_days': 2,
+                    # 'expires':None, #秒
+                },
+            },
+            login_url="/login",
+
         )
 
         super().__init__(handlers, **settings)

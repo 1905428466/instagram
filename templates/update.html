@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}
+图片上传
+{% end %}
+
+{% block body %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% module xsrf_form_html() %}
+    <input type="file" name="image_file">
+    <button type="submit">上传</button>
+</form>
+{% end %}

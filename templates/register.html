@@ -6,6 +6,7 @@
 
 {% block body %}
     <form action="" method="post">
+        {% module xsrf_form_html() %}
         请输入用户名：<input type="text" name="username"><br>
         请输入密&nbsp码：<input type="password" name="password"><br>
         请再次输入密码：<input type="password" name="repeat_password"><br>
