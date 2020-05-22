@@ -5,6 +5,8 @@ from tornado.options import define, options
 
 from handlers.main import IndexHandler, ExploreHandler, PostHandler, UpdateHandler
 from handlers.users import RegisterHandler, LoginHandler
+from handlers.photo import PhotographyHandler, TravelHandler, FashionHandler, AboutHandler, ContactHandler
+
 
 define("port", default="8888", help="Listening port", type=int)
 
@@ -15,9 +17,14 @@ class Application(tornado.web.Application): #tornado配置，比如静态文件
             (r"/", IndexHandler),
             (r"/expore", ExploreHandler),
             (r"/post/(?P<post_id>[0-9]+)", PostHandler),
-            (r"/register", RegisterHandler),
-            (r"/login", LoginHandler),
-            (r"/update", UpdateHandler),
+            (r"/register", RegisterHandler),    # 注册
+            (r"/login", LoginHandler),      # 登录
+            (r"/update", UpdateHandler),    # 图片上传
+            (r"/photography", PhotographyHandler),  # 摄影
+            (r"/travel", TravelHandler),  # 旅行
+            (r"/fashion", FashionHandler),  # 时尚
+            (r"/about", AboutHandler),  # 关于我
+            (r"/contact", ContactHandler),  # 联系我
         ]
         settings = dict(
             debug=True,

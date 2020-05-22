@@ -32,7 +32,7 @@ class PostHandler(tornado.web.RequestHandler):
     单个图片的详情页面
     """
     def get(self, post_id):
-        return self.write("详情页")
+        return self.render("single.html")
 
 
 class UpdateHandler(BaseHandler):
