@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>在线咨询</title>
+</head>
+<body>
+
+<ul id="box"></ul>
+
+<div>
+    <textarea id="inp"></textarea>
+    <a href="javascript:" onclick="sendInp()">发送</a>
+</div>
+
+<script src="{{ static_url('js/jquery.min.js') }}"></script>
+<script>
+    var ws = new WebSocket("ws://127.0.0.1:8888/echoweb");
+
+    ws.onmessage = function (e) {
+        $("#box").append("<p>"+ e.data +"</p>");
+    };
+
+    function sendInp() {
+        var $inp = $("#inp").val();
+        ws.send($inp);
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

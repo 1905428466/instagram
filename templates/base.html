@@ -19,9 +19,7 @@
     <aside id="colorlib-aside" role="complementary" class="js-fullheight text-center">
         <h1 id="colorlib-logo">
 {#            <a href="/">邹栋<span>.</span></a>#}
-            <a href="/register">注册</a>
-            <span>/</span>
-            <a href="/login">登录</a>
+            爱分享
         </h1>
         <nav id="colorlib-main-menu" role="navigation">
             <ul>
@@ -31,6 +29,7 @@
                 <li><a href="/fashion">时尚</a></li>
                 <li><a href="/about">关于我</a></li>
                 <li><a href="/contact">联系我</a></li>
+                <li><a href="/update">分享资源</a></li>
             </ul>
         </nav>
 
@@ -53,13 +52,23 @@
                 <div class="overlay"></div>
                 <div class="js-fullheight d-flex justify-content-center align-items-center">
                     <div class="col-md-8 text text-center">
-                        <div class="img mb-4" style="background-image: url({{static_url('images/author.jpg')}});"></div>
-                        <div class="desc">
-                            <h2 class="subheading">Hello I'm</h2>
-                            <h1 class="mb-4">Elen Henderson</h1>
-                            <p class="mb-4">I am A Blogger Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                            <p><a href="#" class="btn-custom">More About Me <span class="ion-ios-arrow-forward"></span></a></p>
-                        </div>
+                        {% if current_user %}
+                            <div class="img mb-4" style="background-image: url({{static_url('images/logo.jpg')}});"></div>
+                            <div class="desc">
+                                <h2 class="subheading">你好，我叫</h2>
+                                <h1 class="mb-4">{{ current_user }}</h1>
+                                <p class="mb-4">我是一个python程序员眼中不仅仅只有代码还有诗和远方.</p>
+                                <p><a href="#" class="btn-custom">更多关于我<span class="ion-ios-arrow-forward"></span></a></p>
+                            </div>
+                        {% else %}
+                            <div class="img mb-4" style="background-image: url({{static_url('images/not_login.jpg')}});"></div>
+                            <h2 class="subheading">
+                                <a href="/register">注册</a>
+                                <span>/</span>
+                                <a href="/login">登录</a>
+                            </h2>
+                        {% end %}
+
                     </div>
                 </div>
             </div>

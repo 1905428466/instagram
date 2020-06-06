@@ -6,7 +6,7 @@ from tornado.options import define, options
 from handlers.main import IndexHandler, ExploreHandler, PostHandler, UpdateHandler
 from handlers.users import RegisterHandler, LoginHandler
 from handlers.photo import PhotographyHandler, TravelHandler, FashionHandler, AboutHandler, ContactHandler
-
+from handlers.chat import RoomHandler, EchoWebSocket
 
 define("port", default="8888", help="Listening port", type=int)
 
@@ -25,6 +25,8 @@ class Application(tornado.web.Application): #tornado配置，比如静态文件
             (r"/fashion", FashionHandler),  # 时尚
             (r"/about", AboutHandler),  # 关于我
             (r"/contact", ContactHandler),  # 联系我
+            (r"/room", RoomHandler),  # 在线咨询
+            (r"/echoweb", EchoWebSocket),  #
         ]
         settings = dict(
             debug=True,
